@@ -1,0 +1,45 @@
+<mat-toolbar color="primary" class="app-toolbar">
+    <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <a class="app-home-link" routerLink="/">
+        <img src="assets/alpstein-logo-round.png" alt="">
+        <span>{{ 'app.title' | transloco }}</span>
+    </a>
+    <span class="spacer"></span>
+    <button mat-button [matMenuTriggerFor]="langMenu" [attr.aria-label]="'toolbar.language' | transloco">
+        <mat-icon>language</mat-icon>
+        {{ activeLang.toUpperCase() }}
+    </button>
+    <mat-menu #langMenu="matMenu">
+        <button mat-menu-item (click)="setLang('en')">
+            <mat-icon svgIcon="flag-en"></mat-icon>
+            EN
+        </button>
+        <button mat-menu-item (click)="setLang('de')">
+            <mat-icon svgIcon="flag-de"></mat-icon>
+            DE
+        </button>
+    </mat-menu>
+    <a mat-icon-button href="https://github.com" target="_blank" aria-label="GitHub">
+        <mat-icon svgIcon="github"></mat-icon>
+    </a>
+</mat-toolbar>
+
+<mat-sidenav-container class="app-container">
+    <mat-sidenav mode="side" [opened]="sidenavOpened" class="app-sidenav">
+        <mat-nav-list>
+            <div class="side-nav-section side-nav-section-own">
+                <side-nav-link-list [sideNavLinks]="sideNavLinks"/>
+                <side-nav-link-list [sideNavLinks]="otherSideNavLinks"/>
+            </div>
+            <div class="side-nav-section side-nav-section-generated">
+                <side-nav-link-list [sideNavLinks]="generatedSideNavLinks"/>
+            </div>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="app-content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container> 

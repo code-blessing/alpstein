@@ -1,0 +1,42 @@
+<nav mat-tab-nav-bar class="view-tabs-bar" [tabPanel]="tabPanel">
+    @for (tab of tabs; track tab.key) {
+        <!-- The close button stays a sibling of the link instead of a child of it: a control
+             inside an anchor is invalid HTML, and MatTabLink turns SPACE and ENTER into a click
+             on the anchor, which a nested control would swallow. It is laid over the end of the
+             link, which is what makes it a part of the tab. -->
+        <div class="view-tab">
+            <a mat-tab-link
+               class="view-tab-link"
+               [active]="tab.key === activeKey"
+               [routerLink]="[viewTabsRoute]"
+               [queryParams]="tab.activateParams"
+               aria-keyshortcuts="Escape"
+               (keydown.escape)="closeTabAndFocusNeighbour(tab)">
+                {{ tab.titleTranslationKey | transloco }}{{ tab.titleSuffix }}
+            </a>
+            <!-- Out of the tab order: the tab itself is the single stop the tab bar has, and
+                 the keyboard closes it with the escape key. -->
+            <button mat-icon-button
+                    class="view-tab-close"
+                    tabindex="-1"
+                    type="button"
+                    [attr.aria-label]="'viewTabs.close' | transloco"
+                    (click)="closeTab(tab)">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    }
+</nav>
+
+<mat-tab-nav-panel #tabPanel class="view-tab-panels">
+    <!-- Tracking the view alongside the tab is what recreates the component when a tab is
+         pointed at another item: NgComponentOutlet never recreates it for changed inputs. -->
+    @for (tab of tabs; track tab.trackId) {
+        <div class="view-tab-panel" [class.view-tab-panel-inactive]="tab.key !== activeKey">
+            <ng-container *ngComponentOutlet="tab.component; inputs: tab.inputs" />
+        </div>
+    }
+    @if (tabs.length === 0) {
+        <p class="view-tabs-empty">{{ 'viewTabs.empty' | transloco }}</p>
+    }
+</mat-tab-nav-panel>

@@ -1,0 +1,16 @@
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+            <div class="search-fields">
+                <mat-form-field>
+                    <mat-label>{{ 'search.field.label' | transloco }}</mat-label>
+                    <input matInput [formControl]="searchQueryControl" [placeholder]="'entitasRelata.search.placeholder' | transloco">
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit">
+                    <mat-icon>search</mat-icon>
+                    {{ 'action.search' | transloco }}
+                </button>
+                <button mat-button type="button" (click)="onReset()">
+                    <mat-icon>clear</mat-icon>
+                    {{ 'action.reset' | transloco }}
+                </button>
+            </div>
+        </form>

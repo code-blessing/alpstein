@@ -1,0 +1,112 @@
+@use '@angular/material' as mat;
+
+$alpstein-blue-palette: (
+  50: #e4f2fa,
+  100: #bcdff3,
+  200: #90cbeb,
+  300: #63b6e2,
+  400: #42a6dc,
+  500: #1e88c7,
+  600: #1a7ab5,
+  700: #16679b,
+  800: #1d4f7c,
+  900: #1d3557,
+  A100: #b3e0ff,
+  A200: #6cc2ff,
+  A400: #2aa5f5,
+  A700: #0b8be0,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(0, 0, 0, 0.87),
+    A200: rgba(0, 0, 0, 0.87),
+    A400: white,
+    A700: white,
+  )
+);
+
+$alpstein-green-palette: (
+  50: #eaf5e7,
+  100: #cbe6c3,
+  200: #a9d69b,
+  300: #86c573,
+  400: #6bb855,
+  500: #4e9f3d,
+  600: #438f35,
+  700: #377b2c,
+  800: #2c6823,
+  900: #1b4a15,
+  A100: #c8f5b5,
+  A200: #a2ec84,
+  A400: #7bd95a,
+  A700: #5fc43e,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(0, 0, 0, 0.87),
+    A200: rgba(0, 0, 0, 0.87),
+    A400: rgba(0, 0, 0, 0.87),
+    A700: rgba(0, 0, 0, 0.87),
+  )
+);
+
+$alpstein-theme: mat.m2-define-light-theme((
+  color: (
+    primary: mat.m2-define-palette($alpstein-blue-palette, 500),
+    accent: mat.m2-define-palette($alpstein-green-palette, 500),
+    warn: mat.m2-define-palette(mat.$m2-red-palette),
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0,
+));
+
+@include mat.elevation-classes();
+@include mat.app-background();
+
+html {
+  @include mat.all-component-themes($alpstein-theme);
+}
+
+@include mat.typography-hierarchy($alpstein-theme);
+
+:root {
+  --alpstein-primary: #{mat.m2-get-color-from-palette($alpstein-blue-palette, 500)};
+}
+
+
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+} 
+
+:root {
+  --mat-tab-divider-height: 1px;
+  --mat-tab-divider-color: lightgrey;
+}
+
+.http-error-snack-bar {
+  --mat-snack-bar-container-color: #b3261e;
+  --mat-snack-bar-supporting-text-color: white;
+  --mat-snack-bar-button-color: white;
+}

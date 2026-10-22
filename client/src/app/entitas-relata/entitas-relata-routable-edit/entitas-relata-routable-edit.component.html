@@ -1,0 +1,13 @@
+<div class="entitas-relata-routable-edit">
+    @if (creating || selectedEntitasRelata) {
+        <app-entitas-relata-form
+                [membrumRelatum]="selectedEntitasRelata"
+                [saving]="saving"
+                (save)="onSave($event)">
+        </app-entitas-relata-form>
+    } @else if (loading) {
+        {{ 'text.loading' | transloco }}
+    } @else {
+        {{ 'text.itemNotFound' | transloco }}
+    }
+</div>

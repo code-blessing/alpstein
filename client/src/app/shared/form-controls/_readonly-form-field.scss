@@ -1,0 +1,27 @@
+// A read-only field is painted like a disabled one, so that it is recognisable as
+// "not editable" without having to click into it. The control itself stays enabled and
+// merely `readonly`, because a disabled control is dropped from the form value.
+.readonly-form-field {
+    --mat-form-field-filled-container-color: var(--mat-form-field-filled-disabled-container-color);
+    --mat-form-field-filled-input-text-color: var(--mat-form-field-filled-disabled-input-text-color);
+    --mat-form-field-filled-label-text-color: var(--mat-form-field-filled-disabled-label-text-color);
+    --mat-form-field-filled-hover-label-text-color: var(--mat-form-field-filled-disabled-label-text-color);
+    --mat-form-field-filled-focus-label-text-color: var(--mat-form-field-filled-disabled-label-text-color);
+    --mat-form-field-filled-active-indicator-color: var(--mat-form-field-filled-disabled-active-indicator-color);
+    --mat-form-field-filled-hover-active-indicator-color: var(--mat-form-field-filled-disabled-active-indicator-color);
+    --mat-form-field-filled-focus-active-indicator-color: var(--mat-form-field-filled-disabled-active-indicator-color);
+    --mat-form-field-filled-caret-color: transparent;
+    --mat-form-field-hover-state-layer-opacity: 0;
+    --mat-form-field-focus-state-layer-opacity: 0;
+
+    input {
+        cursor: default;
+    }
+}
+
+.readonly-form-field-icon {
+    color: var(--mat-form-field-filled-disabled-label-text-color);
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}

@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill" style="width: 100%" [class.readonly-form-field]="readonly">
+    @if (label != '') {
+        <mat-label>{{ label }}</mat-label>
+    }
+    <input matInput [formControl]="textFormControl" [placeholder]="placeholder" [readonly]="readonly">
+    @if (readonly) {
+        <mat-icon matSuffix class="readonly-form-field-icon">lock</mat-icon>
+    }
+    @if (readonly) {
+        <mat-hint>{{ 'field.readonlyHint' | transloco }}</mat-hint>
+    }
+    <app-field-error-messages [control]="textFormControl" [validatorTranslations]="validatorTranslations" />
+</mat-form-field>

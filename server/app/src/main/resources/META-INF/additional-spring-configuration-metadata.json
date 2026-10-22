@@ -1,0 +1,19 @@
+{
+  "properties": [
+    {
+      "name": "org.codeblessing.alpstein.exampledata.createRandomData",
+      "type": "java.lang.Boolean",
+      "description": "Whether random example data is created and persisted on startup of Spring Boot."
+    },
+    {
+      "name": "org.codeblessing.alpstein.exampledata.createRandomData.forGeneratedItems",
+      "type": "java.lang.Boolean",
+      "description": "Create random example data for the generated items having a primary key in addition to the manually implemented items."
+    },
+    {
+      "name": "org.codeblessing.alpstein.persistence.type",
+      "type": "java.lang.String",
+      "description": "Repository implementation to use: 'in-memory' (default) or 'postgres'. With 'postgres' the PostgresSql*Repository beans take precedence over the InMemory*Repository ones."
+    }
+  ]
+}

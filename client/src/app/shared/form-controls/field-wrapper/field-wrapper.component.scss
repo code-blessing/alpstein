@@ -1,0 +1,32 @@
+.field-wrapper-outline {
+    padding: 8px;
+}
+
+.field-wrapper-border-line {
+    border-top: 1px solid #e0e0e0;
+    //border-radius: 4px;
+    padding: 8px;
+    position: relative;
+}
+
+.field-wrapper-heading {
+    position: absolute;
+    top: -10px;
+    background-color: white;
+    padding: 0 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+
+}
+.field-wrapper-title {
+    left: 12px;
+}
+
+.field-wrapper-nullable-switch {
+    right: 12px;
+}
+
+.field-wrapper-content {
+    margin-top: 8px;
+}

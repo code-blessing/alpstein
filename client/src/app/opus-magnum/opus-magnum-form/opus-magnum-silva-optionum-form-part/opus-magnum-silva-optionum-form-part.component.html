@@ -1,0 +1,378 @@
+<!-- @tt{{{
+
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="EntityItemFormPartComponentHtmlRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEntityItemRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEntityFormViewItemModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui.entityform"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="OpusMagnum" replaceByExpression="model.entity.entityName.pascalCase" ]
+        [ searchValue="opusMagnum" replaceByExpression="model.entity.entityName.camelCase" ]
+        [ searchValue="opus-magnum" replaceByExpression="model.entity.entityName.kebabCase" ]
+        [ searchValue="silva-optionum" replaceByExpression="model.item.itemName.kebabCase" ]
+        [ searchValue="SilvaOptionum" replaceByExpression="model.item.itemName.pascalCase" ]
+        [ searchValue="silvaOptionum" replaceByExpression="model.item.itemName.camelCase" ]
+
+    @modify-provided-filepath-by-replacements
+
+
+
+}}}@ -->
+<div [formGroup]="silvaOptionumForm">
+<!-- @tt{{{
+    @if [ conditionExpression="model.tabs.isNotEmpty()" ]
+}}}@  -->
+<mat-tab-group dynamicHeight>
+<!-- @tt{{{
+    @foreach [ iteratorExpression="model.tabs" loopVariable="tab" ]
+
+        @replace-value-by-expression
+        [ searchValue="tab.principale" replaceByExpression="tab.tabTranslationKey" ]
+
+}}}@  -->
+
+    <mat-tab [label]="'tab.principale' | transloco">
+        <div class="column-layout">
+            <!-- @tt{{{
+                @foreach [ iteratorExpression="tab.columns" loopVariable="column" ]
+            }}}@  -->
+
+            <div class="column">
+                <!-- @tt{{{
+                    @render-template
+                    [ templateRendererClassName="EntityItemFormPartBlocksComponentHtmlRenderer" templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular" ]
+                    [ modelName="blocks" modelExpression="column.blocks" ]
+                    [ modelName="item" modelExpression="model.item" ]
+                    [ modelName="entity" modelExpression="model.entity" ]
+                }}}@  -->
+
+                <!-- @tt{{{
+                    @template-renderer [
+                        templateRendererClassName="EntityItemFormPartBlocksComponentHtmlRenderer"
+                        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+                    ] [
+                        modelClassName="UiEntityFormBlockModel"
+                        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui.entityform.blocks"
+                        modelName="blocks"
+                        isList="yes"
+                    ] [
+                        modelClassName="UiItemModel"
+                        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+                        modelName="item"
+                    ] [
+                        modelClassName="UiEntityModel"
+                        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+                        modelName="entity"
+                    ]
+                }}}@  -->
+
+                <!-- @tt{{{   @ignore-text  }}}@ -->
+                <div class="form-row">
+                    <app-field-wrapper [label]="'silvaOptionum.indexUnicus.label' | transloco">
+                        <app-text-input [textFormControl]="indexUnicusControl" [label]="'silvaOptionum.indexUnicus.label' | transloco" [placeholder]="'silvaOptionum.indexUnicus.placeholder' | transloco" [validatorTranslations]="indexUnicusValidatorNames" [readonly]="true" />
+                    </app-field-wrapper>
+                </div>
+                <!-- @tt{{{   @end-ignore-text  }}}@ -->
+
+                <!-- @tt{{{
+                    @foreach [ iteratorExpression="blocks" loopVariable="block" ]
+
+                }}}@  -->
+                <!-- @tt{{{
+                    @if [ conditionExpression="block is org.codeblessing.alpstein.codegen.renderer.model.ui.entityform.blocks.UiEntityFormNamedSectionSplitBlockModel" ]
+
+                    @replace-value-by-expression
+                    [ searchValue="section.generaFundamentalia" replaceByExpression="block.sectionTranslationKey" ]
+
+                }}}@  -->
+                <app-section-splitter [label]="'section.generaFundamentalia' | transloco"></app-section-splitter>
+                <!-- @tt{{{
+                    @else-if [ conditionExpression="block is org.codeblessing.alpstein.codegen.renderer.model.ui.entityform.blocks.UiEntityFormTextBlockModel" ]
+                    @replace-value-by-expression
+                    [ searchValue="text.loremIpsum" replaceByExpression="block.textTranslationKey" ]
+
+                }}}@  -->
+                <app-text-block [label]="'text.loremIpsum' | transloco" />
+                <!-- @tt{{{
+                    @else-if [ conditionExpression="block is org.codeblessing.alpstein.codegen.renderer.model.ui.entityform.blocks.UiEntityFormItemAttributeBlockModel" ]
+
+                }}}@  -->
+                    <!-- @tt{{{
+                        @if [ conditionExpression="(block.attribute.isBuiltIn || block.attribute.isEnum || !block.attribute.isList) && !block.attribute.isNullable" ]
+
+                        @replace-value-by-expression
+                        [ searchValue="silvaOptionum" replaceByExpression="block.item.itemName.camelCase" ]
+                        [ searchValue="campusTextusObligatorius" replaceByExpression="block.attribute.attributeName.camelCase" ]
+
+                    }}}@  -->
+
+                    <div class="form-row">
+                        <app-field-wrapper [label]="'silvaOptionum.campusTextusObligatorius.label' | transloco">
+                            <!-- @tt{{{
+                                @render-template
+                                    [ templateRendererClassName="SingleFormInputHtmlTagRenderer" templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular" ]
+                                    [ modelName="attributeModel" modelExpression="block.attribute" ]
+                                    [ modelName="uiEntityName" modelExpression="block.entity.entityName" ]
+                                @ignore-text
+                            }}}@  -->
+                            <app-text-input [textFormControl]="campusTextusObligatoriusControl" [label]="'silvaOptionum.campusTextusObligatorius.label' | transloco" [placeholder]="'silvaOptionum.campusTextusObligatorius.placeholder' | transloco" [validatorTranslations]="campusTextusObligatoriusValidatorNames" />
+                            <!-- @tt{{{ @end-ignore-text }}}@  -->
+                        </app-field-wrapper>
+                    </div>
+                    <!-- @tt{{{  @end-if  }}}@  -->
+                    <!-- @tt{{{
+                        @if [ conditionExpression="(block.attribute.isBuiltIn || block.attribute.isEnum || !block.attribute.isList) && block.attribute.isNullable" ]
+
+                        @replace-value-by-expression
+                        [ searchValue="silvaOptionum" replaceByExpression="block.item.itemName.camelCase" ]
+                        [ searchValue="campusTextusOptionalis" replaceByExpression="block.attribute.attributeName.camelCase" ]
+
+                    }}}@  -->
+
+                    <div class="form-row">
+                        <app-field-wrapper [label]="'silvaOptionum.campusTextusOptionalis.label' | transloco"
+                                            [nullabilityCheckboxFormControl]="campusTextusOptionalisIsNotNullControl"
+                                            [formGroupToDisableIfNullField]="campusTextusOptionalisControl"
+                         >
+                            <!-- @tt{{{
+                                @render-template
+                                    [ templateRendererClassName="SingleFormInputHtmlTagRenderer" templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular" ]
+                                    [ modelName="attributeModel" modelExpression="block.attribute" ]
+                                    [ modelName="uiEntityName" modelExpression="block.entity.entityName" ]
+                                @ignore-text
+                            }}}@  -->
+                            <app-text-input [textFormControl]="campusTextusOptionalisControl" [label]="'silvaOptionum.campusTextusOptionalis.label' | transloco" [placeholder]="'silvaOptionum.campusTextusOptionalis.placeholder' | transloco" [validatorTranslations]="campusTextusOptionalisValidatorNames" />
+                            <!-- @tt{{{ @end-ignore-text }}}@  -->
+                        </app-field-wrapper>
+                    </div>
+                    <!-- @tt{{{  @end-if  }}}@  -->
+                    <!-- @tt{{{   @ignore-text  }}}@ -->
+                    <div class="form-row">
+                        <app-field-wrapper [label]="'silvaOptionum.campusBivalens.label' | transloco">
+                            <app-boolean-input [booleanFormControl]="campusBivalensControl" [label]="'silvaOptionum.campusBivalens.label' | transloco" [validatorTranslations]="campusBivalensValidatorNames" />
+                        </app-field-wrapper>
+                    </div>
+
+                    <div class="form-row">
+                        <app-field-wrapper [label]="'silvaOptionum.campusNumerorum.label' | transloco">
+                            <app-number-input [numberFormControl]="campusNumerorumControl" [validatorTranslations]="campusNumerorumValidatorNames"></app-number-input>
+                        </app-field-wrapper>
+                    </div>
+
+                    <div class="form-row">
+                        <app-field-wrapper [label]="'silvaOptionum.iteratioSimpliciumTextuum.label' | transloco">
+                            <app-single-text-form-field-table [formArray]="iteratioSimpliciumTextuumControl" [columnHeader]="'silvaOptionum.iteratioSimpliciumTextuum.label' | transloco" [placeholder]="'silvaOptionum.iteratioSimpliciumTextuum.placeholder' | transloco" />
+                        </app-field-wrapper>
+                    </div>
+
+                    <app-section-splitter [label]="'section.obiectaInterna' | transloco"></app-section-splitter>
+
+                    <div class="form-row">
+                        <app-field-wrapper [label]="'silvaOptionum.articulusInteriorSingularis.label' | transloco">
+                            <app-opus-magnum-articulus-interior-form-part [articulusInteriorForm]="articulusInteriorSingularisControl"  />
+                        </app-field-wrapper>
+                    </div>
+
+                    <div class="form-row">
+                        <app-field-wrapper [label]="'silvaOptionum.articulusInteriorSingularisOptionalis.label' | transloco"
+                                           [nullabilityCheckboxFormControl]="articulusInteriorSingularisOptionalisIsNotNullControl"
+                                           [formGroupToDisableIfNullField]="articulusInteriorSingularisOptionalisControl"
+                        >
+                            <app-opus-magnum-articulus-interior-form-part [articulusInteriorForm]="articulusInteriorSingularisOptionalisControl"  />
+                        </app-field-wrapper>
+                    </div>
+                    <!-- @tt{{{   @end-ignore-text  }}}@ -->
+
+                <!-- @tt{{{
+                    @if [ conditionExpression="block.attribute is org.codeblessing.alpstein.codegen.renderer.model.ui.ItemUiIAttributeModel && block.attribute.isList && !block.attribute.isNullable" ]
+
+                    @replace-value-by-expression
+                    [ searchValue="silvaOptionum" replaceByExpression="block.item.itemName.camelCase" ]
+                    [ searchValue="ArticulusInteriorIteratus" replaceByExpression="block.attribute.attributeName.pascalCase" ]
+                    [ searchValue="articulusInteriorIteratus" replaceByExpression="block.attribute.attributeName.camelCase" ]
+                    [ searchValue="ArticulusInterior" replaceByExpression="block.attribute.referencedItem.itemName.pascalCase" ]
+                    [ searchValue="articulusInterior" replaceByExpression="block.attribute.referencedItem.itemName.camelCase" ]
+                    [ searchValue="articulus-interior" replaceByExpression="block.attribute.referencedItem.itemName.kebabCase" ]
+                    [ searchValue="opus-magnum" replaceByExpression="block.entity.entityName.kebabCase" ]
+
+                }}}@  -->
+
+                <div class="form-row">
+                    <app-field-wrapper [label]="'silvaOptionum.articulusInteriorIteratus.label' | transloco">
+                        <app-opus-magnum-articulus-interior-table
+                                [articulusInteriorFormArray]="articulusInteriorIteratusControl"
+                                (editArticulusInteriorFormGroup)="articulusInteriorIteratusEditState.onEdit($event)"
+                                (deleteArticulusInteriorFormGroup)="articulusInteriorIteratusEditState.onDelete($event)"
+                        />
+                        @if (articulusInteriorIteratusEditState.formGroupUnderEdit) {
+                            <div class="edit-area">
+                                <button mat-icon-button color="primary" (click)="articulusInteriorIteratusEditState.close()">
+                                    <mat-icon>edit_off</mat-icon>
+                                </button>
+                                <!-- @tt{{{
+                                    @render-template
+                                        [ templateRendererClassName="SingleFormInputHtmlTagRenderer" templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular" ]
+                                        [ modelName="attributeModel" modelExpression="block.attribute" ]
+                                        [ modelName="uiEntityName" modelExpression="block.entity.entityName" ]
+                                        [ modelName="isList" modelExpression="true" ]
+                                    @ignore-text
+                                }}}@  -->
+                                <app-opus-magnum-articulus-interior-form-part [articulusInteriorForm]="articulusInteriorIteratusEditState.formGroupUnderEdit!"  />
+                                <!-- @tt{{{ @end-ignore-text }}}@  -->
+                            </div>
+                        }
+                    </app-field-wrapper>
+
+                </div>
+                <!-- @tt{{{  @end-if  }}}@  -->
+                <!-- @tt{{{
+                    @if [ conditionExpression="block.attribute is org.codeblessing.alpstein.codegen.renderer.model.ui.ItemUiIAttributeModel && block.attribute.isList && block.attribute.isNullable" ]
+
+                    @replace-value-by-expression
+                    [ searchValue="silvaOptionum" replaceByExpression="block.item.itemName.camelCase" ]
+                    [ searchValue="ArticulusInteriorOptionalisIteratus" replaceByExpression="block.attribute.attributeName.pascalCase" ]
+                    [ searchValue="articulusInteriorOptionalisIteratus" replaceByExpression="block.attribute.attributeName.camelCase" ]
+                    [ searchValue="ArticulusInterior" replaceByExpression="block.attribute.referencedItem.itemName.pascalCase" ]
+                    [ searchValue="articulusInterior" replaceByExpression="block.attribute.referencedItem.itemName.camelCase" ]
+                    [ searchValue="articulus-interior" replaceByExpression="block.attribute.referencedItem.itemName.kebabCase" ]
+                    [ searchValue="opus-magnum" replaceByExpression="block.entity.entityName.kebabCase" ]
+
+                }}}@  -->
+
+                <div class="form-row">
+                    <app-field-wrapper [label]="'silvaOptionum.articulusInteriorOptionalisIteratus.label' | transloco"
+                                       [nullabilityCheckboxFormControl]="articulusInteriorOptionalisIteratusIsNotNullControl"
+                                       [formGroupToDisableIfNullField]="articulusInteriorOptionalisIteratusControl"
+                    >
+                        <app-opus-magnum-articulus-interior-table
+                                [articulusInteriorFormArray]="articulusInteriorOptionalisIteratusControl"
+                                (editArticulusInteriorFormGroup)="articulusInteriorOptionalisIteratusEditState.onEdit($event)"
+                                (deleteArticulusInteriorFormGroup)="articulusInteriorOptionalisIteratusEditState.onDelete($event)"
+                        />
+                        @if (articulusInteriorOptionalisIteratusEditState.formGroupUnderEdit) {
+                            <div class="edit-area">
+                                <button mat-icon-button color="primary" (click)="articulusInteriorOptionalisIteratusEditState.close()">
+                                    <mat-icon>edit_off</mat-icon>
+                                </button>
+                                <!-- @tt{{{
+                                    @render-template
+                                        [ templateRendererClassName="SingleFormInputHtmlTagRenderer" templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular" ]
+                                        [ modelName="attributeModel" modelExpression="block.attribute" ]
+                                        [ modelName="uiEntityName" modelExpression="block.entity.entityName" ]
+                                        [ modelName="isList" modelExpression="true" ]
+                                    @ignore-text
+                                }}}@  -->
+                                <app-opus-magnum-articulus-interior-form-part [articulusInteriorForm]="articulusInteriorOptionalisIteratusEditState.formGroupUnderEdit!"  />
+                                <!-- @tt{{{ @end-ignore-text }}}@  -->
+                            </div>
+                        }
+                    </app-field-wrapper>
+
+                </div>
+                <!-- @tt{{{  @end-if  }}}@  -->
+
+                <!-- @tt{{{
+                 @end-if
+                 @end-foreach
+                }}}@  -->
+                <!-- @tt{{{   @end-template-renderer  }}}@ -->
+            </div>
+            <!-- @tt{{{  @end-foreach  }}}@ -->
+            <!-- @tt{{{   @ignore-text  }}}@ -->
+            <div class="column">
+                <app-section-splitter [label]="'section.relationesExternae' | transloco"></app-section-splitter>
+                <div class="form-row">
+                    <app-field-wrapper [label]="'silvaOptionum.relatioAdEntitatemOptionalis.label' | transloco"
+                                       [nullabilityCheckboxFormControl]="relatioAdEntitatemOptionalisIsNotNullControl"
+                                       [formGroupToDisableIfNullField]="relatioAdEntitatemOptionalisControl"
+                    >
+                        <app-membrum-relatum-reference-field
+                                [membrumRelatumReferenceFormControl]="relatioAdEntitatemOptionalisControl"
+                                [validatorTranslations]="relatioAdEntitatemOptionalisValidatorNames" />
+                    </app-field-wrapper>
+                </div>
+                <div class="form-row">
+                    <app-field-wrapper [label]="'silvaOptionum.relatioAdEntitatemOptionalisIteratus.label' | transloco"
+                                       [nullabilityCheckboxFormControl]="relatioAdEntitatemOptionalisIteratusIsNotNullControl"
+                                       [formGroupToDisableIfNullField]="relatioAdEntitatemOptionalisIteratusControl"
+                    >
+                        <app-membrum-relatum-reference-table
+                                [membrumRelatumReferenceFormArray]="relatioAdEntitatemOptionalisIteratusControl" />
+                    </app-field-wrapper>
+                </div>
+
+                <app-section-splitter [label]="'section.generaEnumerationis' | transloco"></app-section-splitter>
+                <div class="form-row">
+                    <app-field-wrapper [label]="'silvaOptionum.appellatio.label' | transloco">
+                        <app-appellatio-comis-selector [enumFormControl]="appellatioControl" [validatorTranslations]="appellatioValidatorNames"></app-appellatio-comis-selector>
+                    </app-field-wrapper>
+                </div>
+
+                <div class="form-row">
+                    <app-field-wrapper [label]="'silvaOptionum.appellatioOptionalisIteratus.label' | transloco"
+                                       [nullabilityCheckboxFormControl]="appellatioOptionalisIteratusIsNotNullControl"
+                                       [formGroupToDisableIfNullField]="appellatioOptionalisIteratusControl"
+                    >
+                        <app-single-appellatio-comis-form-field-table [formArray]="appellatioOptionalisIteratusControl" [columnHeader]="'silvaOptionum.appellatioOptionalisIteratus.label' | transloco" />
+                    </app-field-wrapper>
+                </div>
+            </div>
+            <!-- @tt{{{   @end-ignore-text  }}}@ -->
+        </div>
+    </mat-tab>
+    <!-- @tt{{{  @end-foreach  }}}@ -->
+    <!-- @tt{{{  @ignore-text  }}}@ -->
+    <mat-tab [label]="'tab.miscellanea' | transloco">
+        <div class="column-layout">
+            <div class="column">
+                <app-text-block [label]="'text.loremIpsumLongum' | transloco" />
+
+                <div class="form-row">
+                    <app-field-wrapper [label]="'silvaOptionum.campusDiei.label' | transloco"
+                                       [nullabilityCheckboxFormControl]="campusDieiIsNotNullControl"
+                                       [formGroupToDisableIfNullField]="campusDieiControl"
+                    >
+                        <app-datepicker-input [datepickerFormControl]="campusDieiControl" [label]="'silvaOptionum.campusDiei.label' | transloco" [placeholder]="'silvaOptionum.campusDiei.placeholder' | transloco" [validatorTranslations]="campusDieiValidatorNames" />
+                    </app-field-wrapper>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <!-- @tt{{{   @end-ignore-text  }}}@ -->
+</mat-tab-group>
+<!-- @tt{{{
+    @end-if
+}}}@  -->
+
+<!-- @tt{{{
+    @if [ conditionExpression="model.noTab.isNotEmpty()" ]
+}}}@  -->
+<div class="column-layout">
+    <!-- @tt{{{
+        @foreach [ iteratorExpression="model.noTab" loopVariable="column" ]
+    }}}@  -->
+    <div class="column">
+            <!-- @tt{{{
+                @render-template
+                [ templateRendererClassName="EntityItemFormPartBlocksComponentHtmlRenderer" templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular" ]
+                [ modelName="blocks" modelExpression="column.blocks" ]
+                [ modelName="item" modelExpression="model.item" ]
+                [ modelName="entity" modelExpression="model.entity" ]
+            }}}@  -->
+    </div>
+    <!-- @tt{{{
+        @end-foreach
+    }}}@  -->
+</div>
+<!-- @tt{{{
+    @end-if
+}}}@  -->
+</div>

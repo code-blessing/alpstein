@@ -1,0 +1,7 @@
+.gradle
+.kotlin
+.idea/*
+!.idea/icon.svg
+build
+**/build
+*.todo.txt

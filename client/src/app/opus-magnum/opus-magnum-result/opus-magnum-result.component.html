@@ -1,0 +1,118 @@
+<!-- @tt{{{
+
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="EntityResultComponentHtmlRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEntityRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEntityModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="OpusMagnum" replaceByExpression="model.entityName.pascalCase" ]
+        [ searchValue="opusMagnum" replaceByExpression="model.entityName.camelCase" ]
+        [ searchValue="opus-magnum" replaceByExpression="model.entityName.kebabCase" ]
+        [ searchValue="SilvaOptionum" replaceByExpression="model.entityRootItem.itemName.pascalCase" ]
+        [ searchValue="silvaOptionum" replaceByExpression="model.entityRootItem.itemName.camelCase" ]
+        [ searchValue="silva-optionum" replaceByExpression="model.entityRootItem.itemName.kebabCase" ]
+
+    @replace-value-by-expression
+        [ searchValue="indexUnicus" replaceByExpression="model.idAttribute.attributeName.camelCase" ]
+
+    @modify-provided-filepath-by-replacements
+
+
+
+}}}@ -->
+<div class="opus-magnum-table-container">
+    <div class="opus-magnum-result-actions">
+        <button mat-raised-button color="primary" (click)="onCreate()">
+            <mat-icon>add</mat-icon>
+            <ng-container>{{ 'opusMagnum.create.title' | transloco }}</ng-container>
+        </button>
+    </div>
+    <div class="opus-magnum-table-area">
+        <div class="opus-magnum-table-scroll">
+            <table mat-table [dataSource]="dataSource">
+                <!-- @tt{{{   @ignore-text  }}}@ -->
+                <!-- IndexUnicus Column -->
+                <ng-container matColumnDef="indexUnicus">
+                    <th mat-header-cell *matHeaderCellDef><span class="table-cell-content">{{ 'silvaOptionum.indexUnicus.label' | transloco }}</span></th>
+                    <td mat-cell *matCellDef="let opusMagnum">
+                        <span class="table-cell-content" [title]="opusMagnum.indexUnicus">{{ opusMagnum.indexUnicus }}</span>
+                    </td>
+                </ng-container>
+                <!-- @tt{{{   @end-ignore-text  }}}@ -->
+
+                <!-- @tt{{{
+                    @foreach [ iteratorExpression="model.searchResultPlainAttributes" loopVariable="attribute" ]
+
+                        @replace-value-by-expression
+                        [ searchValue="campusTextusObligatorius" replaceByExpression="attribute.attributeName.camelCase" ]
+                        [ searchValue="Campus Textus Obligatorius" replaceByExpression="attribute.attributeName.pascalCase" ]
+                        [ searchValue="string" replaceByExpression="attribute.typescriptAttributeType" ]
+
+                }}}@  -->
+                <!-- Campus Textus Obligatorius Column -->
+                <ng-container matColumnDef="campusTextusObligatorius">
+                    <th mat-header-cell *matHeaderCellDef><span class="table-cell-content">{{ 'silvaOptionum.campusTextusObligatorius.label' | transloco }}</span></th>
+                    <td mat-cell *matCellDef="let opusMagnum">
+                        <span class="table-cell-content" [title]="opusMagnum.campusTextusObligatorius">{{ opusMagnum.campusTextusObligatorius }}</span>
+                    </td>
+                </ng-container>
+                <!-- @tt{{{  @end-foreach  }}}@ -->
+                <!-- @tt{{{
+                    @foreach [ iteratorExpression="model.searchResultReferenceAttributes" loopVariable="attribute" ]
+
+                        @replace-value-by-expression
+                        [ searchValue="relatioAdEntitatemOptionalis" replaceByExpression="attribute.attributeName.camelCase" ]
+                        [ searchValue="Relatio Ad Entitatem Optionalis" replaceByExpression="attribute.attributeName.pascalCase" ]
+
+                }}}@  -->
+                <!-- Relatio Ad Entitatem Optionalis Column, a reference shown by the display attributes of the referenced item -->
+                <ng-container matColumnDef="relatioAdEntitatemOptionalis">
+                    <th mat-header-cell *matHeaderCellDef><span class="table-cell-content">{{ 'silvaOptionum.relatioAdEntitatemOptionalis.label' | transloco }}</span></th>
+                    <td mat-cell *matCellDef="let opusMagnum">
+                        <span class="table-cell-content" [title]="relatioAdEntitatemOptionalisLabel(opusMagnum)">{{ relatioAdEntitatemOptionalisLabel(opusMagnum) }}</span>
+                    </td>
+                </ng-container>
+                <!-- @tt{{{  @end-foreach  }}}@ -->
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef>{{ 'table.column.actions' | transloco }}</th>
+                    <td mat-cell *matCellDef="let opusMagnum">
+                        @let openEntryAction = 'action.openEntry' | transloco;
+                        <button mat-icon-button color="primary" (click)="onEdit(opusMagnum)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <!-- The pencil edits the entry in the panel below the result, this link
+                             opens it in an editor tab of its own, next to the board. -->
+                        <a mat-icon-button
+                           [routerLink]="['/opus-magnum-edit', opusMagnum.indexUnicus]"
+                           [matTooltip]="openEntryAction"
+                           [attr.aria-label]="openEntryAction">
+                            <mat-icon>open_in_new</mat-icon>
+                        </a>
+                        <button mat-icon-button color="warn" (click)="onDelete(opusMagnum)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+        @if (loading) {
+            <div class="opus-magnum-table-loading" role="status" [attr.aria-label]="'text.loading' | transloco">
+                <mat-progress-spinner class="opus-magnum-loading-spinner" value="75" diameter="48" aria-hidden="true" />
+            </div>
+        }
+    </div>
+</div> 

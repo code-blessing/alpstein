@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Alpstein Server</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <style>
+        :root {
+            --navy: #1d3557;
+            --sky: #3a9fd6;
+            --text: #2b3440;
+            --muted: #6b7684;
+            --line: #e3e8ee;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 48px 16px;
+            font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: var(--text);
+            background: linear-gradient(180deg, #eaf4fb 0%, #f7f9fb 320px);
+        }
+
+        main {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        header img {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            box-shadow: 0 4px 16px rgba(29, 53, 87, 0.18);
+        }
+
+        h1 {
+            margin: 16px 0 4px;
+            font-weight: 500;
+            font-size: 28px;
+            color: var(--navy);
+        }
+
+        header p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        section {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        h2 {
+            margin: 0;
+            padding: 14px 20px;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--muted);
+            border-bottom: 1px solid var(--line);
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li + li {
+            border-top: 1px solid var(--line);
+        }
+
+        li a {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 4px 16px;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        li a:hover {
+            background: #f2f8fc;
+        }
+
+        code {
+            font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+            font-size: 14px;
+            color: var(--sky);
+        }
+
+        li span {
+            color: var(--muted);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <header>
+        <img src="/assets/alpstein-logo-round.png" alt="Alpstein logo">
+        <h1>Alpstein Server</h1>
+        <p>REST endpoints are served under <code>/api</code>.</p>
+    </header>
+
+    <section>
+        <h2>Endpoints</h2>
+        <ul>
+            <li><a href="/api/greeting"><code>/api/greeting</code><span>Greet the world</span></a></li>
+            <li><a href="/api/greeting/history"><code>/api/greeting/history</code><span>Past greetings</span></a></li>
+            <li><a href="/api/silva-optionum"><code>/api/silva-optionum</code><span>The silva optionum API</span></a></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>API documentation</h2>
+        <ul>
+            <li><a href="/swagger-ui.html"><code>/swagger-ui.html</code><span>Swagger UI</span></a></li>
+            <li><a href="/api/v3/api-docs"><code>/api/v3/api-docs</code><span>JSON spec</span></a></li>
+            <li><a href="/api/v3/api-docs.yaml"><code>/api/v3/api-docs.yaml</code><span>YAML spec</span></a></li>
+        </ul>
+    </section>
+</main>
+</body>
+</html>

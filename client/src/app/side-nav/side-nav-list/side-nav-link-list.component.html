@@ -1,0 +1,3 @@
+@for (sideNavLink of sideNavLinks; track sideNavLink.nameTranslationKey) {
+    <side-nav-entry [routeLink]="sideNavLink.routeLink" [openMode]="sideNavLink.openMode" [linkText]="sideNavLink.nameTranslationKey | transloco" [iconName]="sideNavLink.icon"/>
+}

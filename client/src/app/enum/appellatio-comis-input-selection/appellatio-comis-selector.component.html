@@ -1,0 +1,38 @@
+<!-- @tt{{{
+
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="EnumSelectorComponentHtmlRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEnumRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEnumModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="AppellatioComis" replaceByExpression="model.enumName.pascalCase" ]
+        [ searchValue="appellatioComis" replaceByExpression="model.enumName.camelCase" ]
+        [ searchValue="appellatio-comis" replaceByExpression="model.enumName.kebabCase" ]
+
+    @modify-provided-filepath-by-replacements
+
+
+}}}@ -->
+<mat-form-field appearance="fill" style="width: 100%">
+    @if (label != '') {
+        <mat-label>{{ label }}</mat-label>
+    }
+    <mat-select [formControl]="enumFormControl">
+        @for (appellatioComis of appellatioComisList; track appellatioComis) {
+            <mat-option [value]="appellatioComis">
+                <app-appellatio-comis-i18n [enumValue]="appellatioComis" />
+            </mat-option>
+        }
+    </mat-select>
+
+    <app-field-error-messages [control]="enumFormControl" [validatorTranslations]="validatorTranslations" />
+</mat-form-field>

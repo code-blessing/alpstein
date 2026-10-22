@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{ 'entitasRelata.delete.title' | transloco }}</h2>
+<mat-dialog-content><ng-container>{{ 'dialog.confirmDelete.question' | transloco }}</ng-container> <br />
+    <b>
+    {{ data.entity | json }}
+    </b>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">{{ 'action.cancel' | transloco }}</button>
+    <button mat-raised-button color="warn" (click)="onConfirm()">{{ 'action.ok' | transloco }}</button>
+</mat-dialog-actions>

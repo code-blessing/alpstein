@@ -1,0 +1,77 @@
+<!-- @tt{{{
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="ItemTypeaheadComponentHtmlRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiItemRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiItemModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="MembrumRelatum" replaceByExpression="model.itemName.pascalCase" ]
+        [ searchValue="membrumRelatum" replaceByExpression="model.itemName.camelCase" ]
+        [ searchValue="membrum-relatum" replaceByExpression="model.itemName.kebabCase" ]
+        [ searchValue="ClavisPrimaria" replaceByExpression="model.primaryKeyAttribute.attributeName.pascalCase" ]
+        [ searchValue="clavisPrimaria" replaceByExpression="model.primaryKeyAttribute.attributeName.camelCase" ]
+        [ searchValue="entitas-relata" replaceByExpression="model.ownUiEntityRouteName" ]
+
+    @modify-provided-filepath-by-replacements
+
+}}}@ -->
+<mat-form-field appearance="fill" class="typeahead-field">
+    @if (label !== '') {
+        <mat-label>{{ label }}</mat-label>
+    }
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput
+           #queryInput
+           [placeholder]="placeholderTranslationKey | transloco"
+           [disabled]="disabled"
+           [value]="selectionLabel"
+           [matAutocomplete]="membrumRelatumAutocomplete"
+           (input)="onQueryChanged(queryInput.value)"
+           (blur)="onSearchFieldBlurred(queryInput)">
+<!-- @tt{{{   @if [ conditionExpression="model.hasOwnUiEntity" ]  }}}@ -->
+    <!-- Every action is a pure link: it opens the view it points at in a new tab of the shell,
+         which is what keeps the half filled form the typeahead sits in alive. The action that
+         opens the selected entry comes last, so that the two actions that are always there do
+         not move when a selection appears, and it is a block of its own, because two projected
+         nodes inside one block are silently not projected at all. -->
+    @let membrumRelatumLabel = itemLabelTranslationKey | transloco;
+    @let createEntryAction = 'typeahead.action.createEntry' | transloco: {item: membrumRelatumLabel};
+    @let openBoardAction = 'typeahead.action.openBoard' | transloco: {item: membrumRelatumLabel};
+    @let openSelectedEntryAction = 'typeahead.action.openSelectedEntry' | transloco: {item: membrumRelatumLabel};
+    <a mat-icon-button matSuffix
+       routerLink="/entitas-relata-create"
+       [matTooltip]="createEntryAction"
+       [attr.aria-label]="createEntryAction">
+        <mat-icon>add</mat-icon>
+    </a>
+    <a mat-icon-button matSuffix
+       routerLink="/entitas-relata-board"
+       [matTooltip]="openBoardAction"
+       [attr.aria-label]="openBoardAction">
+        <mat-icon>dashboard</mat-icon>
+    </a>
+    @if (selectionClavisPrimaria !== null) {
+        <a mat-icon-button matSuffix
+           [routerLink]="['/entitas-relata-edit', selectionClavisPrimaria]"
+           [matTooltip]="openSelectedEntryAction"
+           [attr.aria-label]="openSelectedEntryAction">
+            <mat-icon>open_in_new</mat-icon>
+        </a>
+    }
+<!-- @tt{{{   @end-if  }}}@ -->
+    <mat-autocomplete #membrumRelatumAutocomplete="matAutocomplete"
+                      [displayWith]="clearSearchField"
+                      (optionSelected)="onOptionSelected($event.option.value, queryInput)">
+        @for (membrumRelatum of suggestionList(); track membrumRelatum.clavisPrimaria) {
+            <mat-option [value]="membrumRelatum">{{ displayLabel(membrumRelatum) }}</mat-option>
+        }
+    </mat-autocomplete>
+</mat-form-field>

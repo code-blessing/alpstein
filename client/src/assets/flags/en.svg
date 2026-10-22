@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 10">
+  <defs>
+    <clipPath id="clip">
+      <rect width="19" height="10" rx="0" ry="0"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="19" height="10" fill="#b22234"/>
+    <g fill="#fff">
+      <rect y="1" width="19" height="1"/>
+      <rect y="3" width="19" height="1"/>
+      <rect y="5" width="19" height="1"/>
+      <rect y="7" width="19" height="1"/>
+      <rect y="9" width="19" height="1"/>
+    </g>
+    <rect width="7.6" height="5.4" fill="#3c3b6e"/>
+    <!-- Simplified stars pattern -->
+    <g fill="#fff" transform="scale(0.2)">
+      <circle cx="1.9" cy="1.35" r="0.4"/>
+      <circle cx="4.1" cy="1.35" r="0.4"/>
+      <circle cx="6.3" cy="1.35" r="0.4"/>
+      <circle cx="8.5" cy="1.35" r="0.4"/>
+      <circle cx="10.7" cy="1.35" r="0.4"/>
+      <circle cx="2.999" cy="2.7" r="0.4"/>
+      <circle cx="5.199" cy="2.7" r="0.4"/>
+      <circle cx="7.399" cy="2.7" r="0.4"/>
+      <circle cx="9.599" cy="2.7" r="0.4"/>
+      <circle cx="1.9" cy="4.05" r="0.4"/>
+      <circle cx="4.1" cy="4.05" r="0.4"/>
+      <circle cx="6.3" cy="4.05" r="0.4"/>
+      <circle cx="8.5" cy="4.05" r="0.4"/>
+      <circle cx="10.7" cy="4.05" r="0.4"/>
+      <circle cx="2.999" cy="5.4" r="0.4"/>
+      <circle cx="5.199" cy="5.4" r="0.4"/>
+      <circle cx="7.399" cy="5.4" r="0.4"/>
+      <circle cx="9.599" cy="5.4" r="0.4"/>
+    </g>
+  </g>
+  <rect width="19" height="10" fill="none"/>
+</svg>
+

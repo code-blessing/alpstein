@@ -1,0 +1,19 @@
+@let validationErrors = this.validationErrors();
+@if (validationErrors.length > 0) {
+    <div class="validation-summary" role="alert">
+        <div class="validation-summary-title">
+            <mat-icon>error_outline</mat-icon>
+            <span>{{ 'form.validationSummary.title' | transloco }}</span>
+        </div>
+        <ul class="validation-summary-messages">
+            @for (validationError of validationErrors; track $index) {
+                <li>
+                    @if (validationError.fieldLabel !== '') {
+                        <span class="validation-summary-field">{{ validationError.fieldLabel }}</span>
+                    }
+                    {{ validationError.validatorTranslationKey | transloco: validationError.validatorTranslationParams }}
+                </li>
+            }
+        </ul>
+    </div>
+}

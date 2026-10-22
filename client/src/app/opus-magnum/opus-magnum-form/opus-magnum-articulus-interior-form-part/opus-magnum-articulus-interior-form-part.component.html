@@ -1,0 +1,14 @@
+<div class="edit-form-container" [formGroup]="articulusInteriorForm">
+    <div class="form-row">
+        <app-field-wrapper [label]="'articulusInterior.scriptumTriviale.label' | transloco">
+            <app-text-input [textFormControl]="articulusInteriorScriptumTrivialeControl" [label]="'articulusInterior.scriptumTriviale.label' | transloco" [placeholder]="'articulusInterior.scriptumTriviale.placeholder' | transloco" [validatorTranslations]="articulusInteriorScriptumTrivialeValidatorNames" />
+        </app-field-wrapper>
+    </div>
+
+    <div class="form-row">
+        <app-field-wrapper [label]="'articulusInterior.numerusStupidus.label' | transloco">
+            <app-number-input [numberFormControl]="articulusInteriorNumerusStupidusControl" [label]="'articulusInterior.numerusStupidus.label' | transloco" [placeholder]="'articulusInterior.numerusStupidus.placeholder' | transloco" [validatorTranslations]="articulusInteriorNumerusStupidusValidatorNames" />
+        </app-field-wrapper>
+    </div>
+
+</div>

@@ -1,0 +1,50 @@
+/* @tt{{{
+
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="EntityItemTableComponentScssRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEntityItemRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEntityFormViewItemModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui.entityform"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="articulus-interior" replaceByExpression="model.item.itemName.kebabCase" ]
+        [ searchValue="articulusInterior" replaceByExpression="model.item.itemName.camelCase" ]
+        [ searchValue="ArticulusInterior" replaceByExpression="model.item.itemName.pascalCase" ]
+        [ searchValue="opus-magnum" replaceByExpression="model.entity.entityName.kebabCase" ]
+        [ searchValue="OpusMagnum" replaceByExpression="model.entity.entityName.pascalCase" ]
+        [ searchValue="opusMagnum" replaceByExpression="model.entity.entityName.camelCase" ]
+
+    @modify-provided-filepath-by-replacements
+
+
+
+}}}@ */
+.table-container {
+  padding: 20px;
+
+  table {
+    width: 100%;
+  }
+
+  th.mat-header-cell {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.87);
+  }
+
+  .mat-elevation-z8 {
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2),
+    0 8px 10px 1px rgba(0, 0, 0, .14),
+    0 3px 14px 2px rgba(0, 0, 0, .12);
+  }
+}
+
+.selectedRow {
+  background-color: rgba(0, 0, 0, .01);
+}

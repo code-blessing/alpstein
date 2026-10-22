@@ -1,0 +1,69 @@
+/* @tt{{{
+
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="EntityFormComponentScssRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEntityRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEntityModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+      [ searchValue="OpusMagnum" replaceByExpression="model.entityName.pascalCase" ]
+      [ searchValue="opusMagnum" replaceByExpression="model.entityName.camelCase" ]
+      [ searchValue="opus-magnum" replaceByExpression="model.entityName.kebabCase" ]
+      [ searchValue="SilvaOptionum" replaceByExpression="model.entityRootItem.itemName.pascalCase" ]
+      [ searchValue="silvaOptionum" replaceByExpression="model.entityRootItem.itemName.camelCase" ]
+      [ searchValue="silva-optionum" replaceByExpression="model.entityRootItem.itemName.kebabCase" ]
+
+    @modify-provided-filepath-by-replacements
+
+
+
+}}}@ */
+.edit-form-container {
+  margin: 0 auto;
+  padding: 20px;
+
+  mat-card {
+    .mat-mdc-card-header {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+
+  button {
+    min-width: 100px;
+  }
+
+  .save-button-spinner {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+    // The button keeps its label colour while it is disabled, so the spinner
+    // follows that colour instead of the theme's primary.
+    --mat-progress-spinner-active-indicator-color: currentColor;
+    // A determinate spinner draws exactly `value` percent of the circle, so the
+    // visible arc keeps the same length: the indeterminate mode shrinks it to a
+    // barely visible sliver twice per turn. Turning the arc is then up to us.
+    animation: opus-magnum-save-button-spinner-rotate 1.2s linear infinite;
+  }
+} 
+
+// Angular does not scope keyframe names to the component, hence the prefix.
+@keyframes opus-magnum-save-button-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

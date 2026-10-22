@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill" style="width: 100%">
+    @if (label != '') {
+        <mat-label>{{ label }}</mat-label>
+    }
+    <input matInput [matDatepicker]="theDatePicker" [placeholder]="placeholder" [formControl]="datepickerFormControl">
+    <mat-datepicker-toggle matSuffix [for]="theDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #theDatePicker></mat-datepicker>
+    <app-field-error-messages [control]="datepickerFormControl" [validatorTranslations]="validatorTranslations" />
+</mat-form-field>

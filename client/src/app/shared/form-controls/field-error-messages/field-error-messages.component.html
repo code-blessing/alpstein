@@ -1,0 +1,5 @@
+@for (validatorTranslation of validatorTranslations; track validatorTranslation) {
+    @if (hasError(validatorTranslation.validatorName)) {
+        <mat-error>{{ validatorTranslation.validatorTranslationKey | transloco: translationParams(validatorTranslation) }}</mat-error>
+    }
+}

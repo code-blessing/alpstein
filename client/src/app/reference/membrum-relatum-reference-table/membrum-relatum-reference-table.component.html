@@ -1,0 +1,74 @@
+<!-- @tt{{{
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="ItemReferenceTableComponentHtmlRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiItemRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiItemModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="MembrumRelatum" replaceByExpression="model.itemName.pascalCase" ]
+        [ searchValue="membrumRelatum" replaceByExpression="model.itemName.camelCase" ]
+        [ searchValue="membrum-relatum" replaceByExpression="model.itemName.kebabCase" ]
+        [ searchValue="ClavisPrimaria" replaceByExpression="model.primaryKeyAttribute.attributeName.pascalCase" ]
+        [ searchValue="clavisPrimaria" replaceByExpression="model.primaryKeyAttribute.attributeName.camelCase" ]
+        [ searchValue="entitas-relata" replaceByExpression="model.ownUiEntityRouteName" ]
+
+    @modify-provided-filepath-by-replacements
+
+}}}@ -->
+<div class="table-container">
+    <div class="action-bar">
+        <app-membrum-relatum-typeahead
+                [label]="'membrumRelatum.reference.addEntry' | transloco"
+                [excludedClavisPrimariaList]="referencedClavisPrimariaList()"
+                [disabled]="membrumRelatumReferenceFormArray.disabled"
+                (membrumRelatumSelected)="onMembrumRelatumSelected($event)" />
+    </div>
+    <table mat-table [dataSource]="dataSource">
+        <!-- @tt{{{
+            @foreach [ iteratorExpression="model.displayAttributes" loopVariable="displayAttribute" ]
+            @replace-value-by-expression
+                [ searchValue="DescriptioExDistanti" replaceByExpression="displayAttribute.attributeName.pascalCase" ]
+                [ searchValue="descriptioExDistanti" replaceByExpression="displayAttribute.attributeName.camelCase" ]
+        }}}@ -->
+        <!-- Display attribute: DescriptioExDistanti -->
+        <ng-container matColumnDef="descriptioExDistanti">
+            <th mat-header-cell *matHeaderCellDef>{{ columnHeaderDescriptioExDistantiTranslationKey | transloco }}</th>
+            <td mat-cell *matCellDef="let tableRow">{{ tableRow.descriptioExDistanti }}</td>
+        </ng-container>
+        <!-- @tt{{{   @end-foreach  }}}@ -->
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>{{ 'table.column.actions' | transloco }}</th>
+            <td mat-cell *matCellDef="let tableRow">
+<!-- @tt{{{   @if [ conditionExpression="model.hasOwnUiEntity" ]  }}}@ -->
+                <!-- A link, not a button: the referenced entry is opened in a tab of its own,
+                     next to the form this table is edited in. Reading it stays possible while
+                     the reference list itself is disabled. -->
+                @let openEntryAction = 'action.openEntry' | transloco;
+                <a mat-icon-button
+                   [routerLink]="['/entitas-relata-edit', tableRow.clavisPrimaria]"
+                   [matTooltip]="openEntryAction"
+                   [attr.aria-label]="openEntryAction">
+                    <mat-icon>open_in_new</mat-icon>
+                </a>
+<!-- @tt{{{   @end-if  }}}@ -->
+                <button mat-icon-button color="warn" (click)="onDelete(tableRow)" type="button"
+                        [disabled]="membrumRelatumReferenceFormArray.disabled">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

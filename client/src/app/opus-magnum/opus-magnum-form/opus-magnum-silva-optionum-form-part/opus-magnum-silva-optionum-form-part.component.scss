@@ -1,0 +1,58 @@
+/* @tt{{{
+
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="EntityItemFormPartComponentScssRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEntityItemRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEntityFormViewItemModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui.entityform"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+      [ searchValue="OpusMagnum" replaceByExpression="model.entity.entityName.pascalCase" ]
+      [ searchValue="opusMagnum" replaceByExpression="model.entity.entityName.camelCase" ]
+      [ searchValue="opus-magnum" replaceByExpression="model.entity.entityName.kebabCase" ]
+      [ searchValue="silva-optionum" replaceByExpression="model.item.itemName.kebabCase" ]
+      [ searchValue="SilvaOptionum" replaceByExpression="model.item.itemName.pascalCase" ]
+      [ searchValue="silvaOptionum" replaceByExpression="model.item.itemName.camelCase" ]
+
+    @modify-provided-filepath-by-replacements
+
+
+
+}}}@ */
+
+.form-row {
+  margin-bottom: 20px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.edit-area {
+  border-left-color: darkgrey;
+  border-left-width: 1px;
+  border-left-style: solid;
+}
+
+.column-layout {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+}
+
+.column {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .column-layout {
+    flex-direction: column;
+  }
+}

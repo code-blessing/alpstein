@@ -1,0 +1,83 @@
+<!-- @tt{{{
+
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="EntityItemTableComponentHtmlRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEntityItemRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEntityFormViewItemModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui.entityform"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="articulus-interior" replaceByExpression="model.item.itemName.kebabCase" ]
+        [ searchValue="articulusInterior" replaceByExpression="model.item.itemName.camelCase" ]
+        [ searchValue="ArticulusInterior" replaceByExpression="model.item.itemName.pascalCase" ]
+        [ searchValue="opus-magnum" replaceByExpression="model.entity.entityName.kebabCase" ]
+        [ searchValue="OpusMagnum" replaceByExpression="model.entity.entityName.pascalCase" ]
+        [ searchValue="opusMagnum" replaceByExpression="model.entity.entityName.camelCase" ]
+
+    @modify-provided-filepath-by-replacements
+
+
+
+}}}@ -->
+<div class="table-container">
+    <div class="action-bar">
+        <button mat-button color="primary" (click)="onAdd()" type="button" [disabled]="articulusInteriorFormArray.disabled">
+            <mat-icon>add</mat-icon> {{ 'articulusInterior.table.addEntry' | transloco }}
+        </button>
+
+    </div>
+    <table mat-table [dataSource]="dataSource">
+        <!-- @tt{{{
+            @foreach [ iteratorExpression="model.item.attributes" loopVariable="attribute" ]
+
+            @replace-value-by-expression
+            [ searchValue="scriptumTriviale" replaceByExpression="attribute.attributeName.camelCase" ]
+            [ searchValue="ScriptumTriviale" replaceByExpression="attribute.attributeName.pascalCase" ]
+
+
+        }}}@  -->
+
+        <!-- ScriptumTriviale Column -->
+        <ng-container matColumnDef="scriptumTriviale">
+            <th mat-header-cell *matHeaderCellDef>{{ 'articulusInterior.scriptumTriviale.label' | transloco }}</th>
+            <td mat-cell *matCellDef="let tableRow" (click)="onSelect(tableRow.formGroup)">
+                {{ tableRow.scriptumTriviale }}
+            </td>
+        </ng-container>
+        <!-- @tt{{{  @end-foreach  }}}@  -->
+        <!-- @tt{{{ @ignore-text  }}}@ -->
+
+        <!-- NumerusStupidus Column -->
+        <ng-container matColumnDef="numerusStupidus">
+            <th mat-header-cell *matHeaderCellDef>{{ 'articulusInterior.numerusStupidus.label' | transloco }}</th>
+            <td mat-cell *matCellDef="let tableRow" (click)="onSelect(tableRow.formGroup)">
+                {{ tableRow.numerusStupidus }}
+            </td>
+        </ng-container>
+        <!-- @tt{{{ @end-ignore-text  }}}@ -->
+
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>{{ 'table.column.actions' | transloco }}</th>
+            <td mat-cell *matCellDef="let tableRow">
+                <button mat-icon-button color="primary" (click)="onEdit(tableRow.formGroup)" type="button" [disabled]="articulusInteriorFormArray.disabled">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="onDelete(tableRow.formGroup)" type="button" [disabled]="articulusInteriorFormArray.disabled">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.selectedRow] = "isSelected(row)"></tr>
+    </table>
+</div> 

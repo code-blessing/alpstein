@@ -1,0 +1,57 @@
+<!-- @tt{{{
+
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="EntityFormComponentHtmlRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEntityRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEntityModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="OpusMagnum" replaceByExpression="model.entityName.pascalCase" ]
+        [ searchValue="opusMagnum" replaceByExpression="model.entityName.camelCase" ]
+        [ searchValue="opus-magnum" replaceByExpression="model.entityName.kebabCase" ]
+        [ searchValue="SilvaOptionum" replaceByExpression="model.entityRootItem.itemName.pascalCase" ]
+        [ searchValue="silvaOptionum" replaceByExpression="model.entityRootItem.itemName.camelCase" ]
+        [ searchValue="silva-optionum" replaceByExpression="model.entityRootItem.itemName.kebabCase" ]
+
+    @modify-provided-filepath-by-replacements
+
+
+
+}}}@ -->
+<div class="edit-form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ (silvaOptionum ? 'opusMagnum.edit.title' : 'opusMagnum.create.title') | transloco }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form [formGroup]="silvaOptionumForm" (ngSubmit)="onSubmit()">
+                <app-opus-magnum-silva-optionum-form-part [silvaOptionumForm]="silvaOptionumForm" />
+
+                <app-form-validation-summary [form]="silvaOptionumForm" />
+
+                <div class="form-actions">
+                    @if (cancellable) {
+                        <button mat-button type="button" (click)="onCancel()">
+                            {{ 'action.cancel' | transloco }}
+                        </button>
+                    }
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!silvaOptionumForm.valid || saving">
+                        @if (saving) {
+                            <mat-progress-spinner class="save-button-spinner" value="75" diameter="18" aria-hidden="true" />
+                        }
+                        {{ 'action.save' | transloco }}
+                    </button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

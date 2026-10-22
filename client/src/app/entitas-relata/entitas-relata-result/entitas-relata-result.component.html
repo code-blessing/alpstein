@@ -1,0 +1,46 @@
+<div class="entitas-relata-table-container">
+    <div class="entitas-relata-result-actions">
+        <button mat-raised-button color="primary" (click)="onCreate()">
+            <mat-icon>add</mat-icon>
+            <ng-container>{{ 'entitasRelata.create.title' | transloco }}</ng-container>
+        </button>
+    </div>
+    <table mat-table [dataSource]="dataSource">
+
+        <!-- ClavisPrimaria Column -->
+        <ng-container matColumnDef="clavisPrimaria">
+            <th mat-header-cell *matHeaderCellDef>{{ 'membrumRelatum.clavisPrimaria.label' | transloco }}</th>
+            <td mat-cell *matCellDef="let entitasRelata">{{ entitasRelata.clavisPrimaria }}</td>
+        </ng-container>
+        <!-- DescriptioExDistanti Column -->
+        <ng-container matColumnDef="descriptioExDistanti">
+            <th mat-header-cell *matHeaderCellDef>{{ 'membrumRelatum.descriptioExDistanti.label' | transloco }}</th>
+            <td mat-cell *matCellDef="let entitasRelata">{{ entitasRelata.descriptioExDistanti }}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>{{ 'table.column.actions' | transloco }}</th>
+            <td mat-cell *matCellDef="let entitasRelata">
+                @let openEntryAction = 'action.openEntry' | transloco;
+                <button mat-icon-button color="primary" (click)="onEdit(entitasRelata)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <!-- The pencil edits the entry in the panel below the result, this link
+                     opens it in an editor tab of its own, next to the board. -->
+                <a mat-icon-button
+                   [routerLink]="['/entitas-relata-edit', entitasRelata.clavisPrimaria]"
+                   [matTooltip]="openEntryAction"
+                   [attr.aria-label]="openEntryAction">
+                    <mat-icon>open_in_new</mat-icon>
+                </a>
+                <button mat-icon-button color="warn" (click)="onDelete(entitasRelata)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div> 

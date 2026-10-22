@@ -1,0 +1,64 @@
+// The tab bar stays out of the scrolling area, so that the scrollbar of the view in the
+// active tab starts below it instead of running across it.
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.view-tabs-bar {
+  flex: none;
+}
+
+.view-tab-panels {
+  flex: 1 1 auto;
+  // Without this the panels grow with their content instead of scrolling inside the shell.
+  min-height: 0;
+  overflow: auto;
+}
+
+.view-tab {
+  display: flex;
+  position: relative;
+}
+
+.view-tab-link {
+  // Keeps the title clear of the close button that lies over this end of the tab.
+  padding-right: 36px;
+}
+
+// The button lies over the end of the link instead of next to it: everything a tab paints -
+// its hover surface, its ripple and the ink bar under the active one - belongs to the link,
+// which therefore has to span the close button as well.
+.view-tab-close {
+  --mdc-icon-button-state-layer-size: 28px;
+
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  // The link itself carries `z-index: 1`, so without this it would cover the button and take
+  // every click meant for it.
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+  }
+}
+
+// An inactive tab keeps its component instance, and with it the state of its view, so it is
+// hidden instead of being removed.
+.view-tab-panel-inactive {
+  display: none !important;
+}
+
+.view-tabs-empty {
+  padding: 20px;
+  color: rgba(0, 0, 0, 0.6);
+}

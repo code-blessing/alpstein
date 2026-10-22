@@ -1,0 +1,94 @@
+<!-- @tt{{{
+
+
+    @template-renderer [
+        templateRendererClassName="EntityBoardComponentHtmlRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEntityRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEntityModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="OpusMagnum" replaceByExpression="model.entityName.pascalCase" ]
+        [ searchValue="opusMagnum" replaceByExpression="model.entityName.camelCase" ]
+        [ searchValue="opus-magnum" replaceByExpression="model.entityName.kebabCase" ]
+        [ searchValue="SilvaOptionum" replaceByExpression="model.entityRootItem.itemName.pascalCase" ]
+        [ searchValue="silvaOptionum" replaceByExpression="model.entityRootItem.itemName.camelCase" ]
+        [ searchValue="silva-optionum" replaceByExpression="model.entityRootItem.itemName.kebabCase" ]
+
+    @modify-provided-filepath-by-replacements
+    
+
+}}}@ -->
+<div class="opus-magnum-container">
+    <div class="opus-magnum-header">
+        <h2>{{'opusMagnum.board.title' | transloco }}</h2>
+    </div>
+
+    <mat-accordion class="opus-magnum-accordion" multi>
+        <!-- Search Panel -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>search</mat-icon>
+                    <ng-container>{{ 'opusMagnum.search.panelTitle' | transloco }}</ng-container>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-opus-magnum-search (search)="onSearch($event)"></app-opus-magnum-search>
+        </mat-expansion-panel>
+
+        <!-- Results Panel -->
+        <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>list</mat-icon>
+                    <ng-container>{{ 'opusMagnum.result.panelTitle' | transloco }}</ng-container>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-opus-magnum-result
+                    [searchCriteria]="currentSearchCriteria"
+                    (selectOpusMagnum)="onOpusMagnumSelect($event)"
+                    (deleteOpusMagnum)="onDeleteOpusMagnum($event)"
+                    (createOpusMagnum)="onCreateOpusMagnum()"
+                    [refreshKey]="refreshKey">
+            </app-opus-magnum-result>
+        </mat-expansion-panel>
+
+        <!-- Edit Form Panel -->
+        <mat-expansion-panel #editPanel
+                [expanded]="!!selectedOpusMagnum || creating"
+                [disabled]="!selectedOpusMagnum && !creating"
+                (afterExpand)="scrollToEditPanel()">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>edit</mat-icon>
+                    <ng-container>{{ (creating ? 'opusMagnum.create.title' : 'opusMagnum.edit.title') | transloco }}</ng-container>
+                </mat-panel-title>
+                @if (selectedOpusMagnum) {
+                    <mat-panel-description>
+                        <!-- @tt{{{
+                            @replace-value-by-expression
+                            [ searchValue="indexUnicus" replaceByExpression="model.idAttribute.attributeName.camelCase" ]
+                        }}}@  -->
+                        {{ selectedOpusMagnum.indexUnicus }}
+                        <!-- @tt{{{ @end-replace-value-by-expression  }}}@ -->
+                    </mat-panel-description>
+                }
+            </mat-expansion-panel-header>
+
+            @if (selectedOpusMagnum || creating) {
+                <app-opus-magnum-form
+                        [silvaOptionum]="selectedOpusMagnum"
+                        [saving]="saving"
+                        [cancellable]="true"
+                        (save)="onSave($event)"
+                        (cancel)="onCancel()">
+                </app-opus-magnum-form>
+            }
+        </mat-expansion-panel>
+    </mat-accordion>
+</div> 

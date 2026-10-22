@@ -1,0 +1,38 @@
+<!-- @tt{{{
+
+
+    @move-comment-backward
+    @template-renderer [
+        templateRendererClassName="EntityConfirmDeleteDialogComponentHtmlRenderer"
+        templateRendererPackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+        templateRendererInterfaceName="UiEntityRenderer"
+        templateRendererInterfacePackageName="org.codeblessing.alpstein.codegen.renderer.angular"
+    ] [
+        modelClassName="UiEntityModel"
+        modelPackageName="org.codeblessing.alpstein.codegen.renderer.model.ui"
+        modelName="model"
+    ]
+
+    @replace-value-by-expression
+        [ searchValue="OpusMagnum" replaceByExpression="model.entityName.pascalCase" ]
+        [ searchValue="opusMagnum" replaceByExpression="model.entityName.camelCase" ]
+        [ searchValue="opus-magnum" replaceByExpression="model.entityName.kebabCase" ]
+        [ searchValue="SilvaOptionum" replaceByExpression="model.entityRootItem.itemName.pascalCase" ]
+        [ searchValue="silvaOptionum" replaceByExpression="model.entityRootItem.itemName.camelCase" ]
+        [ searchValue="silva-optionum" replaceByExpression="model.entityRootItem.itemName.kebabCase" ]
+
+    @modify-provided-filepath-by-replacements
+
+
+
+}}}@ -->
+<h2 mat-dialog-title>{{ 'opusMagnum.delete.title' | transloco }}</h2>
+<mat-dialog-content><ng-container>{{ 'dialog.confirmDelete.question' | transloco }}</ng-container> <br />
+    <b>
+    {{ data.entity | json }}
+    </b>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">{{ 'action.cancel' | transloco }}</button>
+    <button mat-raised-button color="warn" (click)="onConfirm()">{{ 'action.ok' | transloco }}</button>
+</mat-dialog-actions>

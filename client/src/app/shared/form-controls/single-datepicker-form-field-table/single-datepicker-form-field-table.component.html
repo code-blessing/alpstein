@@ -1,0 +1,5 @@
+<app-single-form-field-table [formArray]="formArray" [columnHeader]="columnHeader" [createControl]="createControl">
+    <ng-template let-control>
+        <app-datepicker-input [datepickerFormControl]="control" [placeholder]="placeholder" />
+    </ng-template>
+</app-single-form-field-table>

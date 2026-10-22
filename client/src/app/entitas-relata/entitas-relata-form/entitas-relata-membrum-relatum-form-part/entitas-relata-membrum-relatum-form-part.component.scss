@@ -1,0 +1,30 @@
+
+.form-row {
+  margin-bottom: 20px;
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.edit-area {
+  border-left-color: darkgrey;
+  border-left-width: 1px;
+  border-left-style: solid;
+}
+
+.column-layout {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+}
+
+.column {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .column-layout {
+    flex-direction: column;
+  }
+}

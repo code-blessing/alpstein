@@ -1,0 +1,30 @@
+<div [formGroup]="membrumRelatumForm">
+<mat-tab-group dynamicHeight>
+
+    <mat-tab [label]="'tab.referenced' | transloco">
+        <div class="column-layout">
+
+            <div class="column">
+
+
+
+                    <div class="form-row">
+                        <app-field-wrapper [label]="'membrumRelatum.clavisPrimaria.label' | transloco">
+                <app-text-input [textFormControl]="clavisPrimariaControl" [label]="'membrumRelatum.clavisPrimaria.label' | transloco" [placeholder]="'membrumRelatum.clavisPrimaria.placeholder' | transloco" [validatorTranslations]="clavisPrimariaValidatorNames" [readonly]="true" />                                </app-field-wrapper>
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <app-field-wrapper [label]="'membrumRelatum.descriptioExDistanti.label' | transloco">
+                <app-text-input [textFormControl]="descriptioExDistantiControl" [label]="'membrumRelatum.descriptioExDistanti.label' | transloco" [placeholder]="'membrumRelatum.descriptioExDistanti.placeholder' | transloco" [validatorTranslations]="descriptioExDistantiValidatorNames" />                                </app-field-wrapper>
+                    </div>
+
+
+
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+
+</div>

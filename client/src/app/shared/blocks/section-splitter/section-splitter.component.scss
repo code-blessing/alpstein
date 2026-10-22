@@ -1,0 +1,25 @@
+
+.section-splitter-border-line {
+    border-top: 1px solid #e0e0e0;
+    //border-radius: 4px;
+    padding: 8px;
+    position: relative;
+}
+
+.section-splitter-heading {
+    position: absolute;
+    top: -10px;
+    background-color: white;
+    padding: 0 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+
+}
+.section-splitter-title {
+    left: 12px;
+}
+
+.section-splitter-content {
+    margin-top: 8px;
+}

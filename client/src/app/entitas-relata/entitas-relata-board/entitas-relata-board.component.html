@@ -1,0 +1,62 @@
+<div class="entitas-relata-container">
+    <div class="entitas-relata-header">
+        <h2>{{'entitasRelata.board.title' | transloco }}</h2>
+    </div>
+
+    <mat-accordion class="entitas-relata-accordion" multi>
+        <!-- Search Panel -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>search</mat-icon>
+                    <ng-container>{{ 'entitasRelata.search.panelTitle' | transloco }}</ng-container>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-entitas-relata-search (search)="onSearch($event)"></app-entitas-relata-search>
+        </mat-expansion-panel>
+
+
+        <!-- Results Panel -->
+        <mat-expansion-panel expanded>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>list</mat-icon>
+                    <ng-container>{{ 'entitasRelata.result.panelTitle' | transloco }}</ng-container>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-entitas-relata-result
+                    [searchCriteria]="currentSearchCriteria"
+                    (selectEntitasRelata)="onEntitasRelataSelect($event)"
+                    (deleteEntitasRelata)="onDeleteEntitasRelata($event)"
+                    (createEntitasRelata)="onCreateEntitasRelata()"
+                    [refreshKey]="refreshKey">
+            </app-entitas-relata-result>
+        </mat-expansion-panel>
+
+        <!-- Edit Form Panel -->
+        <mat-expansion-panel
+                [expanded]="!!selectedEntitasRelata || creating"
+                [disabled]="!selectedEntitasRelata && !creating">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>edit</mat-icon>
+                    <ng-container>{{ (creating ? 'entitasRelata.create.title' : 'entitasRelata.edit.title') | transloco }}</ng-container>
+                </mat-panel-title>
+                @if (selectedEntitasRelata) {
+                    <mat-panel-description>
+                        {{ selectedEntitasRelata.clavisPrimaria }}
+                    </mat-panel-description>
+                }
+            </mat-expansion-panel-header>
+
+            @if (selectedEntitasRelata || creating) {
+                <app-entitas-relata-form
+                        [membrumRelatum]="selectedEntitasRelata"
+                        [cancellable]="true"
+                        (save)="onSave($event)"
+                        (cancel)="onCancel()">
+                </app-entitas-relata-form>
+            }
+        </mat-expansion-panel>
+    </mat-accordion>
+</div> 

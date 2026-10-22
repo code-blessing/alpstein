@@ -1,0 +1,113 @@
+/*
+ * This file is generated using https://github.com/code-blessing/tavnit
+ */
+package org.codeblessing.alpstein.codegen.renderer.angular
+
+import org.codeblessing.alpstein.codegen.renderer.model.ui.UiEntityModel
+
+/**
+ * Generate the content for the template `EntityResultComponentScssRenderer`.
+ *
+ * This template renderer was generated from the template:
+ * - file: `opus-magnum-result.component.scss`
+ * - path: `opus-magnum/opus-magnum-result/opus-magnum-result.component.scss`
+ */
+object EntityResultComponentScssRenderer : UiEntityRenderer {
+
+    override fun renderTemplate(model: UiEntityModel): String {
+        return """
+          |.${model.entityName.kebabCase}-table-container {
+          |  padding: 20px;
+          |
+          |  .${model.entityName.kebabCase}-result-actions {
+          |    display: flex;
+          |    justify-content: flex-end;
+          |    margin-bottom: 16px;
+          |
+          |    mat-icon {
+          |      margin-right: 8px;
+          |    }
+          |  }
+          |
+          |  .${model.entityName.kebabCase}-table-area {
+          |    position: relative;
+          |    // Holds the loading overlay open before the first result has arrived,
+          |    // when the table itself is still empty and has almost no height.
+          |    min-height: 120px;
+          |  }
+          |
+          |  .${model.entityName.kebabCase}-table-loading {
+          |    position: absolute;
+          |    inset: 0;
+          |    display: flex;
+          |    align-items: center;
+          |    justify-content: center;
+          |    background: rgba(255, 255, 255, 0.6);
+          |    // The cdk table writes an inline z-index on every sticky cell (100 for the
+          |    // header row, 101 where the sticky action column crosses it), which would
+          |    // otherwise paint over the spinner.
+          |    z-index: 102;
+          |  }
+          |
+          |  .${model.entityName.kebabCase}-loading-spinner {
+          |    // A determinate spinner draws exactly `value` percent of the circle, so the
+          |    // visible arc keeps the same length: the indeterminate mode shrinks it to a
+          |    // barely visible sliver twice per turn. Turning the arc is then up to us.
+          |    animation: ${model.entityName.kebabCase}-loading-spinner-rotate 1.2s linear infinite;
+          |  }
+          |
+          |  .${model.entityName.kebabCase}-table-scroll {
+          |    max-width: 100%;
+          |    // Capping the height keeps a long result list inside its own scroll area
+          |    // instead of letting it push the panels below it out of the window.
+          |    max-height: 60vh;
+          |    overflow: auto;
+          |  }
+          |
+          |  table {
+          |    width: 100%;
+          |  }
+          |
+          |  .table-cell-content {
+          |    display: block;
+          |    max-width: 200px;
+          |    overflow: hidden;
+          |    text-overflow: ellipsis;
+          |    white-space: nowrap;
+          |  }
+          |
+          |  .mat-column-actions {
+          |    // A minimal width lets the browser shrink the column to its buttons,
+          |    // which keeps the sticky action column as narrow as possible.
+          |    width: 1px;
+          |    white-space: nowrap;
+          |    text-align: right;
+          |    padding-left: 8px;
+          |  }
+          |
+          |  th.mat-header-cell {
+          |    font-weight: bold;
+          |    color: rgba(0, 0, 0, 0.87);
+          |  }
+          |
+          |  .mat-elevation-z8 {
+          |    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2),
+          |    0 8px 10px 1px rgba(0, 0, 0, .14),
+          |    0 3px 14px 2px rgba(0, 0, 0, .12);
+          |  }
+          |} 
+          |
+          |// Angular does not scope keyframe names to the component, hence the prefix.
+          |@keyframes ${model.entityName.kebabCase}-loading-spinner-rotate {
+          |  to {
+          |    transform: rotate(360deg);
+          |  }
+          |}
+          |
+        """.trimMargin(marginPrefix = "|")
+    }
+
+    override fun filePath(model: UiEntityModel): String {
+      return "${model.entityName.kebabCase}/${model.entityName.kebabCase}-result/${model.entityName.kebabCase}-result.component.scss"
+    }
+}
